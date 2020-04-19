@@ -26,6 +26,10 @@ $routes = [
   '/posts-edit' => [
     'controller' => 'postAdminController',
     'method' => 'edit'
+  ],
+  '/lieferschein' => [
+    'controller' => 'deliverynoteController',
+    'method' => 'edit'
   ]
 ];
 

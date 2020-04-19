@@ -11,6 +11,7 @@ use App\User\UserRepository;
 use App\Post\PostsController;
 use App\User\LoginController;
 use App\Post\PostAdminController;
+use App\Post\DeliverynoteController;
 use App\User\LoginService;
 
 class Container
@@ -40,6 +41,13 @@ class Container
         return new PostAdminController(
           $this -> make("postsRepository"),
           $this -> make("loginService")
+        );
+      },
+
+      'deliverynoteController' => function()
+      {
+        return new DeliverynoteController (
+
         );
       },
 
