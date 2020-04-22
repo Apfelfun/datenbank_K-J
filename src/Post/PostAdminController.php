@@ -31,14 +31,14 @@ public function edit()
   $id = $_GET['id'];
   $entry = $this -> postsRepository -> find($id);
 
+
   $saved = false;
-if (!empty($_POST['title']) AND !empty($_POST['content']))
+if (!empty($_POST['hscode']) AND !empty($_POST['content']))
 {
-  $entry->title = $_POST['title'];
   $entry->content = $_POST['content'];
   $entry->hscode = $_POST['hscode'];
   $entry->manufacturer = $_POST['manufacturer'];
-
+  $entry->storage = $_POST['storage'];
   $this->postsRepository->update($entry);
   $saved = true;
 }

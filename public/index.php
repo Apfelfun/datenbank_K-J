@@ -29,7 +29,7 @@ $routes = [
   ],
   '/lieferschein' => [
     'controller' => 'deliverynoteController',
-    'method' => 'edit'
+    'method' => 'show'
   ]
 ];
 

@@ -47,7 +47,8 @@ class Container
       'deliverynoteController' => function()
       {
         return new DeliverynoteController (
-
+          $this -> make("postsRepository"),
+          $this -> make("loginService")
         );
       },
 
