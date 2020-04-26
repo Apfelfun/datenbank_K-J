@@ -47,7 +47,7 @@ class Pdf extends fpdf
     $this->setX(20);
     $this->SetFont('Arial','',7);
     $this->SetTextColor(27,90,155);
-    $this->Cell(1,5,'Knaack & Jahn Schiffbau GmbH Uffelnsweg 10 20539 Hamburg',0,1);
+    $this->Cell(1,5,convert('Knaack & Jahn Schiffbau GmbH · Uffelnsweg 10 · 20539 Hamburg'),0,1);
 
     $this->setX(90);
     $this->SetFont('Arial','B',10);
@@ -58,25 +58,25 @@ class Pdf extends fpdf
     $this->setX(150);
     $this->SetFont('Arial','B',7);
     $this->SetTextColor(249,0,0);
-    $this->Cell(1,3,'Pipeline: Repairs',0,1);
+    $this->Cell(1,3,convert('· Pipeline: Repairs'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Conversion: New construction',0,1);
+    $this->Cell(1,3,'  Conversion: New construction',0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Supply and disposal technolgy',0,1);
+    $this->Cell(1,3,convert('· Supply and disposal technolgy'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Ship operation technolgy',0,1);
+    $this->Cell(1,3,convert('· Ship operation technolgy'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Mechanical engineering',0,1);
+    $this->Cell(1,3,convert('· Mechanical engineering'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Exhaust systems',0,1);
+    $this->Cell(1,3,convert('· Exhaust systems'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Ventilation',0,1);
+    $this->Cell(1,3,convert('  Ventilation'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'Refrigeration. Air-Conditioning',0,1);
+    $this->Cell(1,3,convert('· Refrigeration. Air-Conditioning'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'KJ FireOff Systems:',0,1);
+    $this->Cell(1,3,convert('· KJ FireOff Systems:'),0,1);
     $this->setX(150);
-    $this->Cell(1,3,'water, gas and foam',0,1);
+    $this->Cell(1,3,convert('  water, gas and foam'),0,1);
     //Anschrift von KJ
     $this->setY(75);
     $this->setX(150);
@@ -92,13 +92,13 @@ class Pdf extends fpdf
     $this->setX(150);
     $this->Cell(1,3,'Telefax: +49 (0) 40 / 78 12 93 -10',0,1);
     $this->setX(150);
-    $this->Cell(1,3,'www.k-j.de schiffbau@k-j.de',0,1);
+    $this->Cell(1,3,convert('www.k-j.de · schiffbau@k-j.de'),0,1);
     //Nummer des Lieferscheins
     $this->setY(100);
     $this->setX(20);
     $this->SetFont('Arial','BI',18);
     $this->SetTextColor(0,0,0);
-    $this->Cell(1,2,'Deliverynote',0,0);
+    $this->Cell(1,2,'Delivery note',0,0);
     $this->Cell(1,3,'',0,0);
     //Tabelle
     $this->setY(110);
@@ -106,9 +106,9 @@ class Pdf extends fpdf
     $this->SetFont('Arial','',10);
     $this->SetTextColor(0,0,0);
     $this->Cell(90,10,'Order by:',1,0);
-    $this->Cell(90,10,'Projectnumber:',1,1);
+    $this->Cell(90,10,'Project no.',1,1);
     $this->setX(20);
-    $this->Cell(90,10,'Your ordernumber: by:',1,0);
+    $this->Cell(90,10,'Your order no.:',1,0);
     $this->Cell(90,10,'Our contact',1,1);
     $this->setX(20);
     $this->Cell(90,10,'Vessel:',1,0);
@@ -116,8 +116,26 @@ class Pdf extends fpdf
     $this->setX(20);
     $this->Cell(90,10,'Your order from:',1,0);
     $this->Cell(90,10,'Page: 1',1,1);
+  }
 
-
+  function footer()
+  {
+    $this->setY(-26);
+    $this->setX(20);
+    $this->SetFont('Arial','',7);
+    $this->SetTextColor(249,0,0);
+    $this->Cell(1,3,convert('Our general terms and conditions (GTC) on www.k-j.de are to be applied, which we will send to you on demand.'),0,1);
+    $this->setX(20);
+    $this->SetTextColor(27,90,155);
+    $this->Cell(1,3,convert('Managing Directors: Manfred Klitzke, Hasan Yilmaz'),0,1);
+    $this->setX(20);
+    $this->Cell(1,3,convert('HRB Nr. 95290 Amtsgericht Hamburg · USt.-IdNr. DE 814554892 · EORI Nr. DE504701735754827'),0,1);
+    $this->setX(20);
+    $this->Cell(1,3,'Commerzbank Hamburg	IBAN DE23 2008 0000 0307 3130 00	BIC DRESDEFF200',0,1);
+    $this->setX(20);
+    $this->Cell(1,3,'Hamburger Sparkasse	IBAN DE62 2005 0550 1252 1222 52	BIC HASPDEHHXXX',0,1);
+    $this->setX(20);
+    $this->Cell(1,3,'Sparkasse Holstein	IBAN DE91 2135 2240 0030 0245 75	BIC NOLADE21HOL',0,1);
 
   }
 }

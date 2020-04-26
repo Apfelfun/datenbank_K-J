@@ -12,6 +12,10 @@ class DeliverynoteController extends AbstractController
     $this->loginService = $loginService;
   }
 
+  public function date() {
+    return date('d.m.Y');
+  }
+
   public function show()
   {
     $this -> loginService -> check();
@@ -32,16 +36,19 @@ class DeliverynoteController extends AbstractController
 
       $vessel = $_POST['vessel'];
       $reference = $_POST['reference'];
-    }
 
-
-
-    if (isset($_POST['insert'])) {
       $itemSelect = $_POST['thenumbers'];
       $select = $this -> postsRepository -> find($itemSelect);
+
+      $itemSelect2 = $_POST['thenumbers2'];
+      $select2 = $this -> postsRepository -> find($itemSelect2);
+
     }
 
     if (isset($_POST['pdf'])) {
+      if ($_POST['thenumbers'] == "") {
+
+      }
       $pdf= new Pdf();
       $pdf->AddPage();
       $pdf->setY(50);
@@ -63,15 +70,34 @@ class DeliverynoteController extends AbstractController
       $pdf->Cell(2,4,$zipcodeinvoice,0,1);
       //Lieferscheinzahl
       $pdf->setY(100);
-      $pdf->setX(60);
-      $pdf->SetFont('Arial','',18);
+      $pdf->setX(61);
+      $pdf->SetFont('Arial','',17);
       $pdf->Cell(1,2,$deliveryno,0,1);
+      //Projektnummer
+      $pdf->setY(113);
+      $pdf->setX(140);
+      $pdf->SetFont('Arial','',10);
+      $pdf->Cell(2,4,$projectnumber,0,1);
+      $pdf->setY(123);
+      $pdf->setX(52);
+      $pdf->Cell(2,4,$reference,0,1);
+      $pdf->setY(133);
+      $pdf->setX(32);
+      $pdf->Cell(2,4,$vessel,0,0);
+      $pdf->setX(120);
+      $pdf->Cell(2,4,$this->date(),0,1);
+      //Aufzählung
+      $pdf->setY(160);
+      $pdf->setX(20);
+      $pdf->SetFont('Arial','',11);
+      $pdf->Cell(10,4,'1',1,0);
+      $pdf->Cell(10,4,'1',1,1);
+
       $pdf->Output();
     }
 
     $this -> render("user/deliverynote", [
       'all' => $all,
-      'select' => $select
     ]);
   }
 

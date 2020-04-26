@@ -21,21 +21,32 @@
         <label for="exampleFormControlTextarea1">Refernz vom Kunden</label>
         <input type="text" name="reference" class="form-control" >
         <br>
-        <h5>Produkte</h5>
+
+        <label for="exampleFormControlTextarea1">Auswahlliste</label>
         <select class="form-control" id="select_1" name="thenumbers">
+          <option value="">-</option>
           <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
             <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
           <?php endforeach; ?>
         </select>
         <br>
-        <input type="submit" name="insert" value="Hinzufügen">
+        <!-- Zweites Produkt hinzufügen-->
+        <select class="form-control" id="select_1" name="thenumbers2">
+          <option value="">-</option>
+          <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
+            <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
+          <?php endforeach; ?>
+        </select>
         <br>
-        <br>
+          <!-- Erstes Produkt hinzufügen-->
         <label for="exampleFormControlTextarea1">Produktname</label>
-        <input type="text" name="productname" value="<?php echo e($select->title);
-        ?>" class="form-control" >
-
-
+        <input type="text" name="productname" value="" class="form-control" >
+        <br>
+        <label for="exampleFormControlTextarea1">Anzahl</label>
+        <input type="text" name="productcount" value="" class="form-control" >
+        <br>
+        <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
+        <input type="text" name="productname" value="" class="form-control" >
       </div>
 
       <div class="col-sm">
@@ -54,15 +65,21 @@
         <label for="exampleFormControlTextarea1">Schiffsname</label>
         <input type="text" name="vessel" class="form-control" >
         <br>
+        <label for="exampleFormControlTextarea1">Anzahl</label>
+        <input type="text" name="productcount" value="Anzahl eingeben" class="form-control" >
+        <label for="exampleFormControlTextarea1">Anzahl</label>
+        <input type="text" name="productcount" value="Anzahl eingeben" class="form-control" >
         <br>
+        <!-- Zweites Produkt hinzufügen-->
+        <label for="exampleFormControlTextarea1">Produktname</label>
+        <input type="text" name="productname2" value="" class="form-control" >
         <br>
         <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productname" value="<?php echo e($select->hscode);
-        ?>" class="form-control" >
+        <input type="text" name="productcount2" value="" class="form-control" >
         <br>
         <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
-        <input type="text" name="productname" value="<?php echo e($select->hscode);
-        ?>" class="form-control" >
+        <input type="text" name="custom2" value="" class="form-control" >
+
       </div>
 
     </div>
