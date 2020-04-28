@@ -82,7 +82,7 @@ class DeliverynoteController extends AbstractController
       $pdf->setX(52);
       $pdf->Cell(2,4,$reference,0,1);
       $pdf->setY(133);
-      $pdf->setX(32);
+      $pdf->setX(52);
       $pdf->Cell(2,4,$vessel,0,0);
       $pdf->setX(120);
       $pdf->Cell(2,4,$this->date(),0,1);

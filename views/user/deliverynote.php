@@ -21,6 +21,8 @@
         <label for="exampleFormControlTextarea1">Refernz vom Kunden</label>
         <input type="text" name="reference" class="form-control" >
         <br>
+        <label for="exampleFormControlTextarea1">Ansprechperson (Kunde)</label>
+        <input type="text" name="personcustomer" class="form-control" >
 
         <label for="exampleFormControlTextarea1">Auswahlliste</label>
         <select class="form-control" id="select_1" name="thenumbers">
