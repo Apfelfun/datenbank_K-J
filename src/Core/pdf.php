@@ -93,6 +93,11 @@ class Pdf extends fpdf
     $this->Cell(1,3,'Telefax: +49 (0) 40 / 78 12 93 -10',0,1);
     $this->setX(150);
     $this->Cell(1,3,convert('www.k-j.de · schiffbau@k-j.de'),0,1);
+    $this->middlePart();
+  }
+
+  function middlePart()
+  {
     //Nummer des Lieferscheins
     $this->setY(100);
     $this->setX(20);
@@ -105,17 +110,26 @@ class Pdf extends fpdf
     $this->setX(20);
     $this->SetFont('Arial','',10);
     $this->SetTextColor(0,0,0);
-    $this->Cell(90,10,'Order by:',1,0);
+    $this->Cell(90,10,'Order by',1,0);
     $this->Cell(90,10,'Project no.',1,1);
     $this->setX(20);
     $this->Cell(90,10,'Your order no.:',1,0);
     $this->Cell(90,10,'Our contact',1,1);
     $this->setX(20);
-    $this->Cell(90,10,'Vessel:',1,0);
-    $this->Cell(90,10,'Date:',1,1);
+    $this->Cell(90,10,'Vessel',1,0);
+    $this->Cell(90,10,'Date',1,1);
     $this->setX(20);
-    $this->Cell(90,10,'Your order from:',1,0);
-    $this->Cell(90,10,'Page: 1',1,1);
+    $this->Cell(90,10,'Your order from',1,0);
+    $this->Cell(90,10,'Page',1,1);
+    //Auflistung
+    $this->setY(156);
+    $this->setX(20);
+    $this->Cell(10,4,'Pos.',1,0);
+    $this->Cell(12,4,'Quant.',1,0);
+    $this->Cell(10,4,'Unit',1,0);
+    $this->Cell(68,4,'Article/Description',1,0);
+    $this->Cell(40,4,'CTN',1,0);
+    $this->Cell(40,4,'Weight kg',1,0);
   }
 
   function footer()

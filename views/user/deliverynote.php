@@ -23,7 +23,9 @@
         <br>
         <label for="exampleFormControlTextarea1">Ansprechperson (Kunde)</label>
         <input type="text" name="personcustomer" class="form-control" >
-
+        <br>
+        <br>
+        <h4><u>Items auswählen</u></h4>
         <label for="exampleFormControlTextarea1">Auswahlliste</label>
         <select class="form-control" id="select_1" name="thenumbers">
           <option value="">-</option>
@@ -32,7 +34,6 @@
           <?php endforeach; ?>
         </select>
         <br>
-        <!-- Zweites Produkt hinzufügen-->
         <select class="form-control" id="select_1" name="thenumbers2">
           <option value="">-</option>
           <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
@@ -40,7 +41,7 @@
           <?php endforeach; ?>
         </select>
         <br>
-          <!-- Erstes Produkt hinzufügen-->
+        <h5>Manuelle Eingabe</h5>
         <label for="exampleFormControlTextarea1">Produktname</label>
         <input type="text" name="productname" value="" class="form-control" >
         <br>
@@ -48,7 +49,7 @@
         <input type="text" name="productcount" value="" class="form-control" >
         <br>
         <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
-        <input type="text" name="productname" value="" class="form-control" >
+        <input type="text" name="customNumber1" value="" class="form-control" >
       </div>
 
       <div class="col-sm">
@@ -67,11 +68,16 @@
         <label for="exampleFormControlTextarea1">Schiffsname</label>
         <input type="text" name="vessel" class="form-control" >
         <br>
+        <label for="exampleFormControlTextarea1">Abmaße (L x W x H)</label>
+        <input type="text" name="dimension" class="form-control" >
+        <br><br><br>
+        <h4></h4>
         <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productcount" value="Anzahl eingeben" class="form-control" >
+        <input type="text" name="productcountdropdown" value="" class="form-control" >
         <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productcount" value="Anzahl eingeben" class="form-control" >
-        <br>
+        <input type="text" name="productcountdropdown2" value="" class="form-control" >
+        <br><br>
+        <h5></h5>
         <!-- Zweites Produkt hinzufügen-->
         <label for="exampleFormControlTextarea1">Produktname</label>
         <input type="text" name="productname2" value="" class="form-control" >
@@ -80,12 +86,13 @@
         <input type="text" name="productcount2" value="" class="form-control" >
         <br>
         <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
-        <input type="text" name="custom2" value="" class="form-control" >
+        <input type="text" name="$customNumber2" value="" class="form-control" >
 
       </div>
 
     </div>
-    <input type="submit" name="pdf" value="PDF">
+    <br>
+    <button type="submit" name="pdf" class="btn btn-info">Lieferschein erzeugen</button>
   </form>
 </div>
 
