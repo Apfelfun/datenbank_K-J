@@ -30,7 +30,6 @@ class DeliverynoteController extends AbstractController
     $this -> loginService -> check();
     $all = $this -> postsRepository -> all();
 
-
     if (isset($_POST['pdf'])) {
       $this->createPDF();
     }
@@ -40,15 +39,13 @@ class DeliverynoteController extends AbstractController
     ]);
   }
 
-  public function ownSetXY($xvalue, $yvalue)
-  {
-    return $pdf->SetXY($xvalue, $yvalue);
-  }
-
   public function createPDF() {
+    $pdf= new Pdf();
+    $cell_width = 68;
+    $cell_height = 4;
+    $leftFrame = 20;
+    $invoiceLeftFrame = 90;
 
-    if (!empty($_POST['deliveryno']))
-    {
 
       $deliveryno = $_POST['deliveryno'];
       $projectnumber = $_POST['projectnumber'];
@@ -65,15 +62,7 @@ class DeliverynoteController extends AbstractController
       $reference = $_POST['reference'];
       $personcustomer = $_POST['personcustomer'];
 
-      $productname = $_POST['productname'];
-      $productname2 = $_POST['productname2'];
       $dimension = $_POST['dimension'];
-
-      $productcount = $_POST['productcount'];
-      $productcount2 = $_POST['productcount2'];
-
-      $customNumber1 = $_POST['customNumber1'];
-      $customNumber2 = $_POST['$customNumber2'];
 
       $productcountdropdown = $_POST['productcountdropdown'];
       $productcountdropdown2 = $_POST['productcountdropdown2'];
@@ -84,12 +73,6 @@ class DeliverynoteController extends AbstractController
       $select = $this -> postsRepository -> find($itemSelect);
       $select2 = $this -> postsRepository -> find($itemSelect2);
 
-    }
-    $pdf= new Pdf();
-    $cell_width = 68;
-    $cell_height = 4;
-    $leftFrame = 20;
-    $invoiceLeftFrame = 90;
 
     $pdf->AddPage();
     $pdf->setY(50);
@@ -137,6 +120,27 @@ class DeliverynoteController extends AbstractController
     /*
     Code gegebenfalls optimieren!!!!! ->
     */
+    if (isset($_POST["productname"]))
+    {
+      $amountProductname = count($_POST["productname"]);
+      $amountCount = count($_POST["productcount"]);
+      if ($amountProductname == $amountCount)
+      {
+        for ($i=1; $i <= $amountProductname; $i++) {
+          $pdf->setXY(52,160);
+          $pdf->MultiCell($cell_width,$cell_height,$_POST["productname"][$i],1,'1L');
+          $H = $pdf->GetY();
+          $hight = $H-160;
+          $pdf->setXY(20,160);
+          $pdf->Cell(10,$hight,'1',1,0);
+          $pdf->Cell(12,$hight,$_POST["productcount"][$i],1,0);
+          $pdf->Cell(10,$hight,'',1,0);
+          $pdf->setX(120);
+          $pdf->Cell(40,$hight,'',1,0);
+          $pdf->Cell(40,$hight,'',1,1);
+        }
+      }
+    }
 
     if (!empty($productcountdropdown) AND !empty($select->title))
     {
@@ -168,41 +172,6 @@ class DeliverynoteController extends AbstractController
       $pdf->Cell(40,$hight2,$select2->hscode,1,0);
       $pdf->Cell(40,$hight2,'',1,1);
     }
-
-    if (!empty($productname) AND !empty($productcount))
-    {
-      $pdf->setX(52);
-      $pdf->MultiCell($cell_width,$cell_height,e($productname),1,'1L');
-      $H3 = $pdf->GetY();
-      $hight3 = $H3-$H2;
-      $pdf->setY($H3-$hight3);
-      $pdf->setX($leftFrame);
-      $pdf->Cell(10,$hight3,'3',1,0);
-      $pdf->Cell(12,$hight3,$productcount,1,0);
-      $pdf->Cell(10,$hight3,'',1,0);
-      $pdf->setX(120);
-      $pdf->Cell(40,$hight3,$customNumber1,1,0);
-      $pdf->Cell(40,$hight3,'',1,1);
-    }
-
-    if (!empty($productname2) AND !empty($productcount2))
-    {
-      $pdf->setX(52);
-      $pdf->MultiCell($cell_width,$cell_height,e($productname2),1,'1L');
-      $H4 = $pdf->GetY();
-      if (isset($H3)) {
-        $hight4 = $H4-$H3;
-        $pdf->setY($H4-$hight4);
-        $pdf->setX($leftFrame);
-        $pdf->Cell(10,$hight4,'4',1,0);
-        $pdf->Cell(12,$hight4,$productcount2,1,0);
-        $pdf->Cell(10,$hight4,'',1,0);
-        $pdf->setX(120);
-        $pdf->Cell(40,$hight4,$customNumber2,1,0);
-        $pdf->Cell(40,$hight4,'',1,1);
-      }
-    }
-
 
     $pdf->setX($leftFrame);
     $pdf->Cell(1,10,'Dimension (L x W x H): ' . $dimension . ' cm',0,1);

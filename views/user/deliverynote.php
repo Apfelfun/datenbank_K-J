@@ -1,10 +1,9 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
-
 <h2>Lieferschein</h2>
 <br>
+  <form method="Post" action="lieferschein">
 <div class="container">
 
-  <form method="Post" action="lieferschein">
     <div class="row">
       <div class="col-sm">
         <label for="exampleFormControlTextarea1">Projektnummer</label>
@@ -24,39 +23,12 @@
         <label for="exampleFormControlTextarea1">Ansprechperson (Kunde)</label>
         <input type="text" name="personcustomer" class="form-control" >
         <br>
-        <br>
-        <h4><u>Items auswählen</u></h4>
-        <label for="exampleFormControlTextarea1">Auswahlliste</label>
-        <select class="form-control" id="select_1" name="thenumbers">
-          <option value="">-</option>
-          <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
-            <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
-          <?php endforeach; ?>
-        </select>
-        <br>
-        <select class="form-control" id="select_1" name="thenumbers2">
-          <option value="">-</option>
-          <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
-            <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
-          <?php endforeach; ?>
-        </select>
-        <br>
-        <h5>Manuelle Eingabe</h5>
-        <label for="exampleFormControlTextarea1">Produktname</label>
-        <input type="text" name="productname" value="" class="form-control" >
-        <br>
-        <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productcount" value="" class="form-control" >
-        <br>
-        <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
-        <input type="text" name="customNumber1" value="" class="form-control" >
       </div>
 
       <div class="col-sm">
         <label for="exampleFormControlTextarea1">Lieferscheinnummer</label>
         <input type="text" name="deliveryno" value="001/2020" class="form-control" >
         <br>
-
         <h5>Rechnungsanschrift</h5>
         <label for="exampleFormControlTextarea1">Firmname</label>
         <input type="text" name="companynameinvoice" class="form-control" >
@@ -70,30 +42,87 @@
         <br>
         <label for="exampleFormControlTextarea1">Abmaße (L x W x H)</label>
         <input type="text" name="dimension" class="form-control" >
-        <br><br><br>
-        <h4></h4>
-        <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productcountdropdown" value="" class="form-control" >
-        <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productcountdropdown2" value="" class="form-control" >
-        <br><br>
-        <h5></h5>
-        <!-- Zweites Produkt hinzufügen-->
-        <label for="exampleFormControlTextarea1">Produktname</label>
-        <input type="text" name="productname2" value="" class="form-control" >
         <br>
-        <label for="exampleFormControlTextarea1">Anzahl</label>
-        <input type="text" name="productcount2" value="" class="form-control" >
-        <br>
-        <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
-        <input type="text" name="$customNumber2" value="" class="form-control" >
-
       </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h4><u>Waren</u></h4>
+      <button class="btn btn-light" type="button" id="add">Produkt hinzufügen</button>
+      <button type="button" class=" btn btn-light btn_remove hidden">Letzten entfernen</button>
+      <div id="dynamic_field"></div>
 
     </div>
-    <br>
-    <button type="submit" name="pdf" class="btn btn-info">Lieferschein erzeugen</button>
-  </form>
+  </div>
 </div>
 
-<?php require __DIR__ . "/../layout/footer.php"; ?>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <br>
+
+      <label for="exampleFormControlTextarea1">Auswahlliste</label>
+
+      <select class="form-control"  name="thenumbers">
+        <option value="">-</option>
+        <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
+          <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
+        <?php endforeach; ?>
+      </select>
+      <br>
+      <select class="form-control" id="select_1" name="thenumbers2">
+        <option value="">-</option>
+        <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
+          <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
+        <?php endforeach; ?>
+      </select>
+
+    </div>
+
+    <div class="col-sm">
+      <br>
+      <label></label>
+      <label for="exampleFormControlTextarea1">Anzahl</label>
+      <input type="text" name="productcountdropdown" value="" class="form-control" >
+      <label for="exampleFormControlTextarea1">Anzahl</label>
+      <input type="text" name="productcountdropdown2" value="" class="form-control" >
+    </div>
+  </div>
+</div>
+<br>
+  <button type="submit" name="pdf" class="btn btn-info">Lieferschein erzeugen</button>
+    </form>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+  var i = 1;
+  $('#add').click(function() {
+    if (i <= 7) {
+      $('#dynamic_field').append('<br><div id="row' + i + '"><label" for="member_' + i + '">Produktname</label><br><input class="form-control" type="text" name="productname[' + i + ']" value=""> <br><label" for="member_' + i + '">Anzahl</label> <input class="form-control" type="text" name="productcount[' + i + ']" value=""><br><label" for="member_' + i + '">Zolltarifnummer</label> <input class="form-control" type="text" name="productcostum[' + i + ']" value=""><br><p>---------------------</p></div>')
+      i++;
+      $('.btn_remove').removeClass('hidden');
+    }
+  });
+  $(document).on('click', '.btn_remove', function() {
+    var button_id = $(this).attr("id");
+    i--;
+    $('#row' + $('#dynamic_field div').length).remove();
+    if (i<=1) {
+      $('.btn_remove').addClass('hidden');
+    }
+  });
+});
+</script>
