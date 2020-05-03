@@ -7,11 +7,13 @@ use Exception;
 use PDOException;
 use App\Post\PostsRepository;
 use App\Post\CommentsRepository;
+use App\Status\DeliveryRepository;
 use App\User\UserRepository;
 use App\Post\PostsController;
 use App\User\LoginController;
 use App\Post\PostAdminController;
 use App\Post\DeliverynoteController;
+use App\Status\DeliveryStatusController;
 use App\User\LoginService;
 
 class Container
@@ -43,12 +45,20 @@ class Container
           $this -> make("loginService")
         );
       },
+      'deliveryStatusController' => function()
+      {
+        return new DeliveryStatusController (
+          $this -> make("deliveryRepository"),
+          $this -> make("loginService")
+        );
+      },
 
       'deliverynoteController' => function()
       {
         return new DeliverynoteController (
           $this -> make("postsRepository"),
-          $this -> make("loginService")
+          $this -> make("loginService"),
+          $this -> make("deliveryRepository")
         );
       },
 
@@ -82,6 +92,13 @@ class Container
       {
         return new UserRepository (
           $this -> make("pdo")
+        );
+      },
+
+      'deliveryRepository' => function()
+      {
+        return new DeliveryRepository (
+          $this->make("pdo")
         );
       },
 

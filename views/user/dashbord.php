@@ -10,6 +10,11 @@
       <div class="col-lg-3">
         <a type="button" class="btn btn-outline-secondary btn-sq-lg" href="lieferschein"><i class="fas fa-box-open fa-5x"></i><br><br>Lieferschein</a>
       </div>
+
+
+      <div class="col-lg-3">
+        <a type="button" class="btn btn-outline-secondary btn-sq-lg" href="status"><i class="fas fa-file-alt fa-5x"></i><br><br>Lieferschein<br>Status</a>
+      </div>
     </div>
     <br>
     <a type="button" class="btn btn-danger" href="logout">Logout</a>

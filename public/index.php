@@ -30,6 +30,10 @@ $routes = [
   '/lieferschein' => [
     'controller' => 'deliverynoteController',
     'method' => 'show'
+  ],
+  '/status' => [
+    'controller' => 'deliveryStatusController',
+    'method' => 'status'
   ]
 ];
 
