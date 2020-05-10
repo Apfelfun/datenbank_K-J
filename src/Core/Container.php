@@ -9,12 +9,15 @@ use App\Post\PostsRepository;
 use App\Post\CommentsRepository;
 use App\Status\DeliveryRepository;
 use App\User\UserRepository;
+use App\Search\SearchController;
 use App\Post\PostsController;
 use App\User\LoginController;
 use App\Post\PostAdminController;
 use App\Post\DeliverynoteController;
 use App\Status\DeliveryStatusController;
 use App\User\LoginService;
+use App\Insert\InsertController;
+use App\Post\PostModel;
 
 class Container
 {
@@ -35,6 +38,22 @@ class Container
         return new PostsController(
           $this -> make("postsRepository"),
           $this -> make("usersRepository")
+        );
+      },
+
+      'insertController' => function()
+      {
+        return new InsertController(
+          $this -> make("loginService"),
+          $this -> make("postsRepository")
+        );
+      },
+
+      'searchController' => function()
+      {
+        return new SearchController(
+          $this -> make("deliveryRepository"),
+          $this -> make("loginService")
         );
       },
 
@@ -78,7 +97,10 @@ class Container
       //Anleitung zum erstellen der Verbindung
       'pdo' => function() {
         try {
-          $pdo = new PDO('mysql:host=localhost; dbname=blog','root',''); // Datenbank Verbindung
+
+          //Local
+          $pdo = new PDO('mysql:host=localhost; dbname=blog','material','mfzzfLBvsoVyEoMk'); // Datenbank Verbindung
+          //$pdo = new PDO('mysql:host=rdbms.strato.de; dbname=DB4149349','U4149349','mircaw-3hyszy-sevfaJ');
         } catch (Exception $e) {
           echo "Fehler";
           die();
@@ -107,6 +129,11 @@ class Container
         return new LoginService
         (
           $this -> make("usersRepository")
+        );
+      },
+      'postModel' => function() {
+        return new PostModel(
+
         );
       }
     ];

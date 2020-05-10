@@ -1,11 +1,20 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
-<h1>Lieferstatus</h1>
-<p>Auftragsnummer: Kunde </p>
-<ul class="list-group">
-  <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
-    <?php if ($row->progress == 1): ?>
-    <a type="button" href="posts-edit?id=<?php echo e($row->id); ?>" class="list-group-item list-group-item-action"><?php echo e($row->projectnumber); ?>&nbsp;&nbsp;<?php echo e($row->deliverycompanyname);?>&nbsp;&nbsp;&nbsp;&nbsp;<b>Status:&nbsp;<?php echo "Lieferschein wurde erzeugt"; ?></b></a>
-  <?php endif; ?>
-<?php endforeach; ?>
-</ul>
+<div class="container">
+  <form class="" action="shipping" method="post">
+    <button type="submit" class="btn btn-outline-secondary" name="button"><i class="fas fa-arrow-left"></i></button>
+  </form>
+  <br>
+  <h1>Lieferstatus</h1>
+  <br>
+  <ul class="list-group">
+    <?php for ($i=0; $i <= $countOrder-1; $i++):?>
+      <h3><b><?php echo e($removeOrder[$i]); ?></b></h3>
+      <br>
+      <?php foreach ($complete[$i] as $row): ?>
+        <p><?php echo e($row->projectnumber); ?></p>
+      <?php endforeach; ?>
+      <br>
+  <?php endfor; ?>
+  </ul>
+</div>
 <?php require __DIR__ . "/../layout/footer.php"; ?>

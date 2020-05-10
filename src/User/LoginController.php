@@ -4,12 +4,19 @@ namespace App\User;
 use App\Core\AbstractController;
 use App\Post\PostsRepository;
 
+
 class LoginController extends AbstractController
 {
 
   function __construct(LoginService $loginService)
   {
     $this -> loginService = $loginService;
+  }
+
+  public function shipping()
+  {
+    $this -> loginService -> check();
+    $this -> render("user/shipping", []);
   }
 
   public function dashbord()

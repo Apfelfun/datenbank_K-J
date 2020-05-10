@@ -74,17 +74,17 @@ class DeliverynoteController extends AbstractController
     $pdf->setY(50);
     $pdf->setX($leftFrame);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(2,4,$companyname,0,1);
+    $pdf->Cell(2,4,convert($companyname),0,1);
     $pdf->setX($leftFrame);
-    $pdf->Cell(2,4,$companyadress,0,1);
+    $pdf->Cell(2,4,convert($companyadress),0,1);
     $pdf->setX($leftFrame);
     $pdf->Cell(2,4,$zipcode,0,1);
     //Rechnungsanschrift
     $pdf->SetXY($invoiceLeftFrame,50);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(2,4,$companynameinvoice,0,1);
+    $pdf->Cell(2,4,convert($companynameinvoice),0,1);
     $pdf->setX($invoiceLeftFrame);
-    $pdf->Cell(2,4,$companyadressinvoice,0,1);
+    $pdf->Cell(2,4,convert($companyadressinvoice),0,1);
     $pdf->setX($invoiceLeftFrame);
     $pdf->Cell(2,4,$zipcodeinvoice,0,1);
     //Lieferscheinzahl
@@ -94,7 +94,7 @@ class DeliverynoteController extends AbstractController
     //Projektnummer
     $pdf->SetFont('Arial','',10);
     $pdf->setXY(52,113);
-    $pdf->Cell(2,4,$personcustomer,0,0);
+    $pdf->Cell(2,4,convert($personcustomer),0,0);
     $pdf->setX(135);
     $pdf->Cell(2,4,$projectnumber,0,0);
     $pdf->setXY(52,123);
@@ -231,7 +231,7 @@ class DeliverynoteController extends AbstractController
     $pdf->Cell(1,10,'________________',0,0);
 
 
-    $pdf->Output();
+    $pdf->Output('I', $projectnumber);
   }
 
 

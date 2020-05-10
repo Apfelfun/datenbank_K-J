@@ -18,22 +18,22 @@ abstract class AbstractRepository
 
   function all()
   {
-    $table = $this -> getTableName();
-    $model = $this -> getModelName();
-    $stmt = $this -> pdo->query("SELECT * FROM `$table`");
-    $posts = $stmt -> fetchAll(PDO::FETCH_CLASS, $model); //Übergibt es dem Layer
+    $table = $this->getTableName();
+    $model = $this->getModelName();
+    $stmt = $this->pdo->query("SELECT * FROM `$table`");
+    $posts = $stmt->fetchAll(PDO::FETCH_CLASS, $model); //Übergibt es dem Layer
     return $posts;
   }
 
 
   function find($id)
   {
-    $table = $this -> getTableName();
-    $model = $this -> getModelName();
-    $q = $this -> pdo->prepare("SELECT * FROM `$table` WHERE id = :id"); //Entsprechende Abfrage an die Datenbank
-    $q -> execute(['id' => $id]);
-    $q -> setFetchMode(PDO::FETCH_CLASS,$model);
-    $post = $q -> fetch(PDO::FETCH_CLASS);
+    $table = $this->getTableName();
+    $model = $this->getModelName();
+    $q = $this->pdo->prepare("SELECT * FROM `$table` WHERE id = :id"); //Entsprechende Abfrage an die Datenbank
+    $q->execute(['id' => $id]);
+    $q->setFetchMode(PDO::FETCH_CLASS,$model);
+    $post = $q->fetch(PDO::FETCH_CLASS);
 
     return $post;
   }

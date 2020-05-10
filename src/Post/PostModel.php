@@ -14,6 +14,13 @@ class PostModel extends AbstractModel implements ArrayAccess
   public $manufacturer;
   public $hscode;
   public $storage;
+  public $supplier;
+  public $pn;
+  public $dn;
+  public $material;
+  public $groupname;
+  public $partnumber;
+  public $type;
 
 }
 ?>

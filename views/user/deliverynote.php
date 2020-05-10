@@ -1,6 +1,12 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
-<h2>Lieferschein</h2>
-<br>
+<div class="container">
+  <form class="" action="shipping" method="post">
+    <button type="submit" class="btn btn-outline-secondary" name="button"><i class="fas fa-arrow-left"></i></button>
+  </form>
+  <br>
+  <h2>Lieferschein</h2>
+  <br>
+</div>
   <form method="Post" action="lieferschein">
 <div class="container">
 

@@ -11,6 +11,11 @@ class DeliveryRepository extends AbstractRepository
     return 'deliverynote';
   }
 
+  public function getRow()
+  {
+    return 'projectnumber';
+  }
+
   public function getModelName()
   {
     return 'App\\Status\\DeliveryModel';
@@ -20,9 +25,8 @@ class DeliveryRepository extends AbstractRepository
   {
     $table = $this->getTableName();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `deliverynote` (`projectnumber`, `deliverynumber`, `deliverycompanyname`, `deliverycompanyadress`, `id`, `deliverycompanyzipcode`, `reference`, `personcustomer`, `companynameinvoice`, `companyadressinvoice`, `zipcodeinvoice`, `vessel`, `dimension`, `progress`) VALUES (:projectnumber, :deliverynumber, :deliverycompanyname, :deliverycompanyadress, NULL, :deliverycompanyzipcode, :reference, :personcustomer, :companynameinvoice, :companyadressinvoice, :zipcodeinvoice, :vessel, :dimension, :progress)");
+    $stmt = $this->pdo->prepare("INSERT INTO `{$table}` (`projectnumber`, `deliverynumber`, `deliverycompanyname`, `deliverycompanyadress`, `id`, `deliverycompanyzipcode`, `reference`, `personcustomer`, `companynameinvoice`, `companyadressinvoice`, `zipcodeinvoice`, `vessel`, `dimension`, `progress`) VALUES (:projectnumber, :deliverynumber, :deliverycompanyname, :deliverycompanyadress, NULL, :deliverycompanyzipcode, :reference, :personcustomer, :companynameinvoice, :companyadressinvoice, :zipcodeinvoice, :vessel, :dimension, :progress)");
 
-    //$stmt = $this->pdo->prepare("UPDATE `{$table}` SET `content` = :content, `title` = :title, `manufacturer` = :manufacturer, `hscode` = :hscode, `storage` = :storage WHERE `id` = :id");
     $stmt->execute([
       'projectnumber' => $projectnumber,
       'deliverynumber' => $deliverynumber,
@@ -38,6 +42,40 @@ class DeliveryRepository extends AbstractRepository
       'dimension' => $dimension,
       'progress' => '1'
     ]);
+  }
+
+  public function search($projectnumber)
+  {
+    $table = $this -> getTableName();
+    $model = $this -> getModelName();
+    $row = $this -> getRow();
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `{$table}` WHERE `{$row}` LIKE :projectnumber");
+    $stmt->execute([
+      'projectnumber' => "%$projectnumber%"
+    ]);
+
+    $deliv = $stmt -> fetchAll(PDO::FETCH_CLASS, $model);;
+
+
+    return $deliv;
+  }
+
+  public function exactNumber($projectnumber)
+  {
+    $table = $this -> getTableName();
+    $model = $this -> getModelName();
+    $row = $this -> getRow();
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `{$table}` WHERE `{$row}` REGEXP :projectnumber");
+    $stmt->execute([
+      'projectnumber' => "%$projectnumber%"
+    ]);
+
+    $deliv = $stmt -> fetchAll(PDO::FETCH_CLASS, $model);;
+
+
+    return $deliv;
   }
 }
 ?>

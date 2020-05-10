@@ -4,21 +4,13 @@
   <br>
     <div class="row">
       <div class="col-lg-3">
-        <a type="button" class="btn btn-outline-secondary  btn-sq-lg" href="itemliste"><i class="fas fa-list fa-5x"></i><br><br>Itemliste</a>
+        <a type="button" class="btn btn btn-light btn-sq-lg" href="material"><br><i class="fas fa-list fa-5x"></i><br><br>Material</a>
       </div>
-
       <div class="col-lg-3">
-        <a type="button" class="btn btn-outline-secondary btn-sq-lg" href="lieferschein"><i class="fas fa-box-open fa-5x"></i><br><br>Lieferschein</a>
-      </div>
-
-
-      <div class="col-lg-3">
-        <a type="button" class="btn btn-outline-secondary btn-sq-lg" href="status"><i class="fas fa-file-alt fa-5x"></i><br><br>Lieferschein<br>Status</a>
+        <a type="button" class="btn btn btn-light btn-sq-lg" href="shipping"><br><i class="fas fa-warehouse fa-5x"></i><br><br>Warenversand</a>
       </div>
     </div>
     <br>
     <a type="button" class="btn btn-danger" href="logout">Logout</a>
-  </div>
-<br>
-
+</div>
 <?php require __DIR__ . "/../layout/footer.php"; ?>

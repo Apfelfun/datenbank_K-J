@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Startseite</title>
+    <title>K&J Schiffbau</title>
 <script src="https://kit.fontawesome.com/9b794ff2eb.js" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
@@ -19,8 +19,11 @@
    <style>
    .btn-sq-lg {
      width: 150px;
-     height: 170px;
+     height: 185px;
    }
+  /* input[required] {
+  border-color: red;
+}*/
    </style>
   </head>
 
