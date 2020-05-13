@@ -1,19 +1,17 @@
-<?php require __DIR__ . "/../layout/header.php"; ?>
+<?php require __DIR__ . "/../layout/headerImprove.html"; ?>
+<body class="text-center">
+  <form method="Post" method="login" class="form-signin">
+      <img src="kj.gif" class="mb-4" alt="" height="150px">
+      <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      <input type="text"name="username" class="form-control" placeholder="Nutzername">
+      <input type="password" class="form-control" name="password" placeholder="Passwort">
+    <button type="submit" name="Einloggen" class="btn btn-lg btn-primary btn-block">Sign in</button>
+    <?php if (!empty($error)): ?>
+    <?php echo "Nutzername oder Passwort ist falsch"; ?>
+    <?php endif; ?>
+  </form>
+</body>
 <br />
-<?php if (!empty($error)): ?>
-<?php echo $error; ?>
-<?php endif; ?>
-<form method="Post" method="login">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Username</label>
-    <input type="text" name="username" class="form-control" >
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name="password">
-  </div>
-  <input type="submit" name="Einloggen" class="btn btn-primary">
-</form>
 
 
 <?php require __DIR__ . "/../layout/footer.php"; ?>

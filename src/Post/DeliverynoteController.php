@@ -15,6 +15,7 @@ class DeliverynoteController extends AbstractController
     $this->deliveryRepository = $deliveryRepository;
   }
 
+
   public function date() {
     return date('d.m.Y');
   }
@@ -41,6 +42,13 @@ class DeliverynoteController extends AbstractController
     $cell_height = 4;
     $leftFrame = 20;
     $invoiceLeftFrame = 90;
+
+    //Berechnung für das Gewicht
+    $weightFirstDropDownWith = 0;
+    $weightSecondDropDownWith = 0;
+    $weightFirstDropDown =0;
+    $weightSecondDropDown = 0;
+    $firstClickWeight = 0;
 
 
     $deliveryno = $_POST['deliveryno'];
@@ -123,6 +131,9 @@ class DeliverynoteController extends AbstractController
 
       if ($amountProductname == $amountCount)
       {
+        if (!empty($_POST['weight'][1]) AND !empty($_POST['productcount'][1])){
+          $firstClickWeight = $_POST['weight'][1]*$_POST['productcount'][1];
+        }
         $pdf->setXY(52,160);
         $pdf->MultiCell($cell_width,$cell_height,convert($_POST["productname"][1]),1,'1L');
         $H[1] = $pdf->GetY();
@@ -133,9 +144,12 @@ class DeliverynoteController extends AbstractController
         $pdf->Cell(10,$hight,'',1,0);
         $pdf->setX(120);
         $pdf->Cell(40,$hight,$_POST["productcostum"][1],1,0);
-        $pdf->Cell(40,$hight,'',1,1);
+        $pdf->Cell(40,$hight,$_POST["weight"][1],1,1);
 
         for ($i=2; $i <= $amountProductname; $i++) {
+          if (!empty($_POST['weight'][$i]) AND !empty($_POST['productcount'])){
+            $firstClickWeight += $_POST["weight"][$i]*$_POST["productcount"][$i];
+          }
           $pdf->setX(52);
           $pdf->MultiCell($cell_width,$cell_height,convert($_POST["productname"][$i]),1,'1L');
           $H[$i] = $pdf->GetY();
@@ -147,11 +161,14 @@ class DeliverynoteController extends AbstractController
           $pdf->Cell(10,$hight2,'',1,0);
           $pdf->setX(120);
           $pdf->Cell(40,$hight2,$_POST["productcostum"][$i],1,0);
-          $pdf->Cell(40,$hight2,'',1,1);
+          $pdf->Cell(40,$hight2,$_POST["weight"][$i],1,1);
         }
 
         if (!empty($productcountdropdown) AND !empty($select->title))
         {
+          if (!empty($select->weight)){
+            $weightFirstDropDownWith = $select->weight*$productcountdropdown;
+          }
           $pdf->setXY(52,$pdf->GetY());
           $pdf->MultiCell($cell_width,$cell_height,e($select->title),1,'1L');
           $Hi2 = $pdf ->GetY();
@@ -164,12 +181,15 @@ class DeliverynoteController extends AbstractController
           $pdf->Cell(10,$highte,'',1,0);
           $pdf->setX(120);
           $pdf->Cell(40,$highte,$select->hscode,1,0);
-          $pdf->Cell(40,$highte,'',1,1);
+          $pdf->Cell(40,$highte,$select->weight ,1,1);
         }
 
 
         if (!empty($productcountdropdown2) AND !empty($select2->title))
         {
+          if (!empty($select2->weight)){
+            $weightSecondDropDownWith = $select2->weight*$productcountdropdown2;
+          }
           $pdf->setXY(52,$pdf->GetY());
           $pdf->MultiCell($cell_width,$cell_height,e($select2->title),1,'1L');
           $Hi3 = $pdf->GetY();
@@ -181,14 +201,20 @@ class DeliverynoteController extends AbstractController
           $pdf->Cell(10,$hight3,'',1,0);
           $pdf->setX(120);
           $pdf->Cell(40,$hight3,$select2->hscode,1,0);
-          $pdf->Cell(40,$hight3,'',1,1);
+          $pdf->Cell(40,$hight3,$select2->weight,1,1);
         }
+        $equal=$firstClickWeight+$weightFirstDropDownWith+$weightSecondDropDownWith;
+        $pdf->setX(140);
+        $pdf->Cell(1,10,'Tot. weight: '.$equal . ' kg',0,0);
 
       }
     } else {
 
       if (!empty($productcountdropdown) AND !empty($select->title))
        {
+         if (!empty($select->weight)){
+          $weightFirstDropDown = $select->weight*$productcountdropdown;
+         }
          $pdf->setXY(52,160);
          $pdf->MultiCell($cell_width,$cell_height,e($select->title),1,'1L');
          $H = $pdf->GetY();
@@ -199,11 +225,14 @@ class DeliverynoteController extends AbstractController
          $pdf->Cell(10,$hight,'',1,0);
          $pdf->setX(120);
          $pdf->Cell(40,$hight,$select->hscode,1,0);
-         $pdf->Cell(40,$hight,'',1,1);
+         $pdf->Cell(40,$hight,$select->weight,1,1);
        }
 
        if (!empty($productcountdropdown2) AND !empty($select2->title))
        {
+         if (!empty($select2->weight)){
+          $weightSecondDropDown = $select2->weight*$productcountdropdown2;
+         }
          $pdf->setX(52);
          $pdf->MultiCell($cell_width,$cell_height,e($select2->title),1,'1L');
          $H2 = $pdf->GetY();
@@ -215,20 +244,27 @@ class DeliverynoteController extends AbstractController
          $pdf->Cell(10,$hight2,'',1,0);
          $pdf->setX(120);
          $pdf->Cell(40,$hight2,$select2->hscode,1,0);
-         $pdf->Cell(40,$hight2,'',1,1);
+         $pdf->Cell(40,$hight2,$select2->weight,1,1);
        }
+       $equal=$weightFirstDropDown+$weightSecondDropDown;
+
+       $pdf->setX(140);
+       $pdf->Cell(1,10,'Tot. weight: '.$equal . ' kg',0,0);
 
     }
-    $this->deliveryRepository->insert($projectnumber, $deliveryno, $companyname, $companyadress, $zipcode, $reference, $personcustomer, $companynameinvoice, $companyadressinvoice, $zipcodeinvoice, $vessel, $dimension);
-
+    $this->deliveryRepository->insert($projectnumber, $deliveryno, $companyname, $companyadress, $zipcode, $reference, $personcustomer, $companynameinvoice, $companyadressinvoice, $zipcodeinvoice, $vessel, $dimension, $this->date());
     $pdf->setX($leftFrame);
-    $pdf->Cell(1,10,'Dimension (L x W x H): ' . $dimension . ' cm',0,1);
-    $pdf->setX($leftFrame);
+    $pdf->Cell(1,10,'Dimension (L x W x H): ' . $dimension . ' cm',0,0);
+    $pdf->setXY($leftFrame,180);
     $pdf->Cell(1,10,'The delivered ware is our property till final payment.',0,1);
     $pdf->setX($leftFrame);
     $pdf->Cell(1,10,'_____________',0,0);
-    $pdf->setX(65);
-    $pdf->Cell(1,10,'________________',0,0);
+    $pdf->setX(70);
+    $pdf->Cell(1,10,'________________',0,1);
+    $pdf->setX($leftFrame);
+    $pdf->Cell(1,5,'Date',0,0);
+    $pdf->setX(70);
+    $pdf->Cell(1,5,'Signature mover',0,0);
 
 
     $pdf->Output('I', $projectnumber);

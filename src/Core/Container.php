@@ -5,18 +5,23 @@ namespace App\Core;
 use PDO;
 use Exception;
 use PDOException;
+//Repository
 use App\Post\PostsRepository;
 use App\Post\CommentsRepository;
 use App\Status\DeliveryRepository;
 use App\User\UserRepository;
+use App\Tool\ToolRepository;
+//Controller
+use App\Tool\ToolController;
 use App\Search\SearchController;
 use App\Post\PostsController;
 use App\User\LoginController;
 use App\Post\PostAdminController;
 use App\Post\DeliverynoteController;
 use App\Status\DeliveryStatusController;
-use App\User\LoginService;
 use App\Insert\InsertController;
+//Login
+use App\User\LoginService;
 use App\Post\PostModel;
 
 class Container
@@ -41,11 +46,20 @@ class Container
         );
       },
 
+      'toolController' => function()
+      {
+        return new ToolController(
+          $this->make("loginService"),
+          $this->make("toolRepository")
+        );
+      },
+
       'insertController' => function()
       {
         return new InsertController(
           $this -> make("loginService"),
-          $this -> make("postsRepository")
+          $this -> make("postsRepository"),
+          $this->make("toolRepository")
         );
       },
 
@@ -94,6 +108,12 @@ class Container
         );
       },
 
+      'toolRepository' => function() {
+        return new ToolRepository(
+          $this->make("pdoTool")
+        );
+      },
+
       //Anleitung zum erstellen der Verbindung
       'pdo' => function() {
         try {
@@ -108,6 +128,21 @@ class Container
 
         $pdo -> setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         return $pdo;
+      },
+
+      'pdoTool' => function() {
+        try {
+
+          //Local
+          $pdoTool = new PDO('mysql:host=localhost; dbname=Tool','tool','JMkJFtxcjAhJyqu5'); // Datenbank Verbindung
+          //$pdoTool = new PDO('mysql:host=rdbms.strato.de; dbname=DB4153293','U4153293','mircaw-3hyszy-sevfaJ');
+        } catch (Exception $e) {
+          echo "Fehler2";
+          die();
+        }
+
+        $pdoTool -> setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        return $pdoTool;
       },
 
       'usersRepository' => function()

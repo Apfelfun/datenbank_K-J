@@ -21,11 +21,11 @@ class DeliveryRepository extends AbstractRepository
     return 'App\\Status\\DeliveryModel';
   }
 
-  public function insert($projectnumber, $deliverynumber, $deliverycompanyname, $deliverycompanyadress, $deliverycompanyzipcode, $reference, $personcustomer, $companynameinvoice, $companyadressinvoice, $zipcodeinvoice, $vessel, $dimension)
+  public function insert($projectnumber, $deliverynumber, $deliverycompanyname, $deliverycompanyadress, $deliverycompanyzipcode, $reference, $personcustomer, $companynameinvoice, $companyadressinvoice, $zipcodeinvoice, $vessel, $dimension, $date)
   {
     $table = $this->getTableName();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `{$table}` (`projectnumber`, `deliverynumber`, `deliverycompanyname`, `deliverycompanyadress`, `id`, `deliverycompanyzipcode`, `reference`, `personcustomer`, `companynameinvoice`, `companyadressinvoice`, `zipcodeinvoice`, `vessel`, `dimension`, `progress`) VALUES (:projectnumber, :deliverynumber, :deliverycompanyname, :deliverycompanyadress, NULL, :deliverycompanyzipcode, :reference, :personcustomer, :companynameinvoice, :companyadressinvoice, :zipcodeinvoice, :vessel, :dimension, :progress)");
+    $stmt = $this->pdo->prepare("INSERT INTO `{$table}` (`projectnumber`, `deliverynumber`, `deliverycompanyname`, `deliverycompanyadress`, `id`, `deliverycompanyzipcode`, `reference`, `personcustomer`, `companynameinvoice`, `companyadressinvoice`, `zipcodeinvoice`, `vessel`, `dimension`, `progress`, `date`) VALUES (:projectnumber, :deliverynumber, :deliverycompanyname, :deliverycompanyadress, NULL, :deliverycompanyzipcode, :reference, :personcustomer, :companynameinvoice, :companyadressinvoice, :zipcodeinvoice, :vessel, :dimension, :progress, :date)");
 
     $stmt->execute([
       'projectnumber' => $projectnumber,
@@ -40,7 +40,8 @@ class DeliveryRepository extends AbstractRepository
       'zipcodeinvoice' => $zipcodeinvoice,
       'vessel' => $vessel,
       'dimension' => $dimension,
-      'progress' => '1'
+      'progress' => '1',
+      'date' => $date
     ]);
   }
 
@@ -51,23 +52,6 @@ class DeliveryRepository extends AbstractRepository
     $row = $this -> getRow();
 
     $stmt = $this->pdo->prepare("SELECT * FROM `{$table}` WHERE `{$row}` LIKE :projectnumber");
-    $stmt->execute([
-      'projectnumber' => "%$projectnumber%"
-    ]);
-
-    $deliv = $stmt -> fetchAll(PDO::FETCH_CLASS, $model);;
-
-
-    return $deliv;
-  }
-
-  public function exactNumber($projectnumber)
-  {
-    $table = $this -> getTableName();
-    $model = $this -> getModelName();
-    $row = $this -> getRow();
-
-    $stmt = $this->pdo->prepare("SELECT * FROM `{$table}` WHERE `{$row}` REGEXP :projectnumber");
     $stmt->execute([
       'projectnumber' => "%$projectnumber%"
     ]);

@@ -24,6 +24,10 @@ $routes = [
     'controller' => 'postAdminController',
     'method' => 'index'
   ],
+  '/toolliste' => [
+    'controller' => 'toolController',
+    'method' => 'toolList'
+  ],
   '/material' => [
     'controller' => 'postAdminController',
     'method' => 'materialOverview'
@@ -37,6 +41,10 @@ $routes = [
     'controller' => 'postAdminController',
     'method' => 'showItem'
   ],
+  '/show-tool' => [
+    'controller' => 'toolController',
+    'method' => 'showTool'
+  ],
   //Änderungen
   '/posts-edit' => [
     'controller' => 'postAdminController',
@@ -44,6 +52,14 @@ $routes = [
   ],
   '/storage-edit' => [
     'controller' => 'postAdminController',
+    'method' => 'storageEdit'
+  ],
+  '/tool-edit' => [
+    'controller' => 'toolController',
+    'method' => 'toolEdit'
+  ],
+  '/tool-storage-edit' => [
+    'controller' => 'toolController',
     'method' => 'storageEdit'
   ],
 //Lieferscheine
@@ -63,6 +79,11 @@ $routes = [
     'controller' => 'loginController',
     'method' => 'shipping'
   ],
+  //Suche
+  '/item-result' => [
+    'controller' => 'postAdminController',
+    'method' => 'result'
+  ],
   '/search' => [
     'controller' => 'searchController',
     'method' => 'search'
@@ -75,6 +96,7 @@ $routes = [
     'controller' => 'searchController',
     'method' => 'detailView'
   ],
+  //Einfügen von neuen Elementen
   '/insert-item' => [
     'controller' => 'insertController',
     'method' => 'start'
@@ -83,9 +105,22 @@ $routes = [
     'controller' => 'insertController',
     'method' => 'insertItem'
   ],
-  '/insert-tool' => [
+  '/insert-add-tool' => [
     'controller' => 'insertController',
     'method' => 'insertTool'
+  ],
+  '/insert-tool' => [
+    'controller' => 'insertController',
+    'method' => 'startTool'
+  ],
+  //Löschen
+  '/delete' => [
+    'controller' => 'postAdminController',
+    'method' => 'deleteItem'
+  ],
+  '/tool-delete' => [
+    'controller' => 'toolController',
+    'method' => 'deleteTool'
   ]
 ];
 

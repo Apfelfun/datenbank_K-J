@@ -134,6 +134,8 @@ class Pdf extends fpdf
 
   function footer()
   {
+    $imgFooter = __DIR__ .'/../../data/foot.png';
+    $this->Image($imgFooter,140,275,60);
     $this->setY(-26);
     $this->setX(20);
     $this->SetFont('Arial','',7);

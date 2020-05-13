@@ -1,13 +1,12 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
-<div class="container">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <form class="" action="material" method="post">
     <button type="submit" class="btn btn-outline-secondary" name="button"><i class="fas fa-arrow-left"></i></button>
   </form>
-  <br>
-  <h2>Material hinzufügen</h2>
-  <br>
+  <h1 class="h2">Material hinzufügen</h1>
+</div>
+<div class="container">
   <form method="Post" action="insert-add">
-    <p>Auswahl für die entsprechende Datenbank folgt</p>
     <label for="exampleFormControlTextarea1">Itemnummer (Nur wenn vorhanden!)</label>
     <input type="text" name="partnumber" placeholder="Item" class="form-control" >
     <br>
@@ -29,6 +28,9 @@
     <label for="exampleFormControlTextarea1">Zolltarifnummer</label>
     <input type="text" name="customnummer" placeholder="Zolltarifnummer" class="form-control" >
     <br>
+    <label for="exampleFormControlTextarea1">Gewicht (ohne kg)!</label>
+    <input type="text" name="weight" placeholder="Gewicht" class="form-control" >
+    <br>
     <h4><b>Technische Informationen</b></h4>
     <label for="exampleFormControlTextarea1">Material</label>
     <input type="text" name="material" placeholder="Material" class="form-control" >
@@ -42,7 +44,9 @@
     <label for="exampleFormControlTextarea1">PN</label>
     <input type="text" name="pn" placeholder="PN" class="form-control" >
     <br>
-
+    <label for="exampleFormControlTextarea1">Preis</label>
+    <input type="text" name="price" placeholder="Preis" class="form-control" >
+    <br>
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Beschreibung</label>
       <textarea name="content" class="form-control" rows="5"></textarea>

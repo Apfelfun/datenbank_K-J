@@ -1,12 +1,11 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
-<div class="container">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <form class="" action="shipping" method="post">
     <button type="submit" class="btn btn-outline-secondary" name="button"><i class="fas fa-arrow-left"></i></button>
   </form>
-  <br>
-  <h2>Lieferschein</h2>
-  <br>
+  <h1 class="h2">Lieferschein</h1>
 </div>
+
   <form method="Post" action="lieferschein">
 <div class="container">
 
@@ -98,7 +97,9 @@
   </div>
 </div>
 <br>
-  <button type="submit" name="pdf" class="btn btn-info">Lieferschein erzeugen</button>
+<div class="container under">
+  <button type="submit" name="pdf" class="btn btn-lg btn-info btn-block">Lieferschein erzeugen</button>
+</div>
     </form>
 
 
@@ -117,7 +118,7 @@ $(document).ready(function() {
   var i = 1;
   $('#add').click(function() {
     if (i <= 7) {
-      $('#dynamic_field').append('<br><div id="row' + i + '"><label" for="member_' + i + '">Produktname</label><br><input class="form-control" type="text" name="productname[' + i + ']" value=""> <br><label" for="member_' + i + '">Anzahl</label> <input class="form-control" type="text" name="productcount[' + i + ']" value=""><br><label" for="member_' + i + '">Zolltarifnummer</label> <input class="form-control" type="text" name="productcostum[' + i + ']" value=""><br><p>---------------------</p></div>')
+      $('#dynamic_field').append('<br><div id="row' + i + '"><label" for="member_' + i + '">Produktname</label><br><input class="form-control" type="text" name="productname[' + i + ']" value=""> <br><label" for="member_' + i + '">Anzahl</label> <input class="form-control" type="text" name="productcount[' + i + ']" value=""><br><label" for="member_' + i + '">Zolltarifnummer</label> <input class="form-control" type="text" name="productcostum[' + i + ']" value=""><br><label" for="member_' + i + '">Gewicht</label> <input class="form-control" type="text" name="weight[' + i + ']" value=""><br><p>---------------------</p></div>')
       i++;
       $('.btn_remove').removeClass('hidden');
     }

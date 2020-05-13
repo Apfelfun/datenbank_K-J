@@ -1,10 +1,12 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
-<div class="container">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <form class="" action="shipping" method="post">
     <button type="submit" class="btn btn-outline-secondary" name="button"><i class="fas fa-arrow-left"></i></button>
   </form>
-  <br>
-  <h1>Suche</h1>
+  <h1 class="h2">Suche</h1>
+</div>
+
+<div class="container">
     <form class="" action="search-result" method="POST">
       <input class="form-control form-control-lg" type="text" name="search" placeholder="Suche">
       <br>

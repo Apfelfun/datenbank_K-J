@@ -21,6 +21,8 @@ class PostModel extends AbstractModel implements ArrayAccess
   public $groupname;
   public $partnumber;
   public $type;
+  public $weight;
+  public $price;
 
 }
 ?>
