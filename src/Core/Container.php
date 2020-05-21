@@ -11,7 +11,10 @@ use App\Post\CommentsRepository;
 use App\Status\DeliveryRepository;
 use App\User\UserRepository;
 use App\Tool\ToolRepository;
+use App\Service\ServiceRepository;
+use App\Service\OrderRepositoriy;
 //Controller
+use App\Service\ServiceController;
 use App\Tool\ToolController;
 use App\Search\SearchController;
 use App\Post\PostsController;
@@ -43,6 +46,15 @@ class Container
         return new PostsController(
           $this -> make("postsRepository"),
           $this -> make("usersRepository")
+        );
+      },
+
+      'serviceController' => function(){
+        return new ServiceController(
+          $this->make('loginService'),
+          $this->make('serviceRepository'),
+          $this->make('deliveryRepository'),
+          $this->make('orderRepository')
         );
       },
 
@@ -98,7 +110,8 @@ class Container
       'loginController' => function()
       {
         return new LoginController(
-          $this -> make('loginService')
+          $this->make('loginService'),
+          $this->make('orderRepository')
         );
       },
 
@@ -111,6 +124,12 @@ class Container
       'toolRepository' => function() {
         return new ToolRepository(
           $this->make("pdoTool")
+        );
+      },
+
+      'orderRepository' => function() {
+        return new OrderRepositoriy(
+          $this->make('pdoService')
         );
       },
 
@@ -145,10 +164,31 @@ class Container
         return $pdoTool;
       },
 
+      'pdoService' => function(){
+        try {
+          $pdoService = new PDO('mysql:host=localhost; dbname=service','root','');
+          //$pdoService = new PDO('mysql:host=rdbms.strato.de; dbname=DB4163437','U4163437','mircaw-3hyszy-sevfaJ');
+          //6jogRgXWSTbEeedF
+        } catch (Exception $e) {
+          echo "Fehler3";
+          die();
+        }
+
+        $pdoService -> setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        return $pdoService;
+      },
+
       'usersRepository' => function()
       {
         return new UserRepository (
           $this -> make("pdo")
+        );
+      },
+
+      'serviceRepository' => function()
+      {
+        return new ServiceRepository (
+          $this->make("pdoService")
         );
       },
 
@@ -192,39 +232,4 @@ class Container
 
   }
 }
-
-  /*
-  private $pdo;
-  private $postsRepsitory;
-
-  public function getPdo()
-  {
-
-    if (!empty($this -> pdo)) // Die Variable PDO nicht leer ist -> baut er nicht immer die selbe Datenbank verbindung auf
-    {
-      return $this -> pdo;
-    }
-
-
-    $this -> pdo = new PDO('mysql:host=localhost; dbname=blog','root',''); // Datenbank Verbindung
-
-    $this -> pdo -> setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    return $this -> pdo;
-  }
-
-  public function getPostsRepository()
-  {
-    if (!empty($this -> postsRepository))
-    {
-      return $this -> postsRepository;
-    }
-    $this -> postsRepository = new PostsRepository(
-      $this -> getPdo()
-    );
-    return $this -> postsRepository;
-  }
-  */
-
-
-
 ?>

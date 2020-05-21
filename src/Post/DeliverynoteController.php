@@ -20,18 +20,29 @@ class DeliverynoteController extends AbstractController
     return date('d.m.Y');
   }
 
+  public function year() {
+    return date('Y');
+  }
+
   public function show()
   {
 
     $this -> loginService -> check();
-    $all = $this -> postsRepository -> all();
+    $all = $this -> deliveryRepository -> all();
+
+    foreach ($all as $row) {
+      $orderNumber[] = e($row->projectnumber);
+    }
+    $removeOrderFirst = array_unique($orderNumber);
+    $removeOrder = array_values($removeOrderFirst);
 
     if (isset($_POST['pdf'])) {
       $this->createPDF();
     }
 
     $this -> render("user/deliverynote", [
-      'all' => $all
+      'all' => $all,
+      'removeOrder' => $removeOrder
     ]);
   }
 
@@ -50,8 +61,6 @@ class DeliverynoteController extends AbstractController
     $weightSecondDropDown = 0;
     $firstClickWeight = 0;
 
-
-    $deliveryno = $_POST['deliveryno'];
     $projectnumber = $_POST['projectnumber'];
 
     $companyname = $_POST['companyname'];
@@ -73,6 +82,17 @@ class DeliverynoteController extends AbstractController
 
     $itemSelect = $_POST['thenumbers'];
     $itemSelect2 = $_POST['thenumbers2'];
+
+    $deliveryno = $this->deliveryRepository->search($projectnumber);
+    $startNumber = $deliveryno[count($deliveryno) - 1]->deliverynumber;
+
+    if (strlen($startNumber) == 1){
+      $deliverynumber = $startNumber+1;
+      $deliverynoName = '00'.$deliverynumber.'/'.$this->year();
+    } else {
+      $deliverynumber = $startNumber+1;
+      $deliverynoName = '0'.$deliverynumber.'/'.$this->year();
+    }
 
     $select = $this -> postsRepository -> find($itemSelect);
     $select2 = $this -> postsRepository -> find($itemSelect2);
@@ -98,7 +118,7 @@ class DeliverynoteController extends AbstractController
     //Lieferscheinzahl
     $pdf->SetXY(61,100);
     $pdf->SetFont('Arial','BI',17);
-    $pdf->Cell(1,2,$deliveryno,0,1);
+    $pdf->Cell(1,2,$deliverynoName,0,1);
     //Projektnummer
     $pdf->SetFont('Arial','',10);
     $pdf->setXY(52,113);
@@ -252,7 +272,7 @@ class DeliverynoteController extends AbstractController
        $pdf->Cell(1,10,'Tot. weight: '.$equal . ' kg',0,0);
 
     }
-    $this->deliveryRepository->insert($projectnumber, $deliveryno, $companyname, $companyadress, $zipcode, $reference, $personcustomer, $companynameinvoice, $companyadressinvoice, $zipcodeinvoice, $vessel, $dimension, $this->date());
+    $this->deliveryRepository->insert($projectnumber, $deliverynumber, $companyname, $companyadress, $zipcode, $reference, $personcustomer, $companynameinvoice, $companyadressinvoice, $zipcodeinvoice, $vessel, $dimension, $this->date());
     $pdf->setX($leftFrame);
     $pdf->Cell(1,10,'Dimension (L x W x H): ' . $dimension . ' cm',0,0);
     $pdf->setXY($leftFrame,180);

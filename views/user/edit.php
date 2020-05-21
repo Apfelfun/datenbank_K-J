@@ -13,6 +13,8 @@
   </div>
   <?php endif; ?>
   <form method="Post" action="posts-edit?id=<?php echo e($entry->id); ?>">
+    @csrf
+    @method('PUT')
     <label for="exampleFormControlTextarea1">Itemnummer</label>
     <input type="text" value=" <?php echo e($entry->partnumber); ?>" name="partnumber" class="form-control" >
     <br>

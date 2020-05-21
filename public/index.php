@@ -121,6 +121,23 @@ $routes = [
   '/tool-delete' => [
     'controller' => 'toolController',
     'method' => 'deleteTool'
+  ],
+  //Service
+  '/service' => [
+    'controller' => 'serviceController',
+    'method' => 'show'
+  ],
+  '/service-result' => [
+    'controller' => 'serviceController',
+    'method' => 'result'
+  ],
+  '/service-insert' => [
+    'controller' => 'serviceController',
+    'method' => 'insert'
+  ],
+  '/service-show-order' => [
+    'controller' => 'serviceController',
+    'method' => 'showOrder'
   ]
 ];
 

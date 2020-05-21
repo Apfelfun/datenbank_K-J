@@ -6,13 +6,17 @@
   <h1 class="h2">Lieferschein</h1>
 </div>
 
-  <form method="Post" action="lieferschein">
-<div class="container">
-
+<form method="Post" action="lieferschein">
+  <div class="container">
     <div class="row">
       <div class="col-sm">
-        <label for="exampleFormControlTextarea1">Projektnummer</label>
-        <input type="text" name="projectnumber" class="form-control" >
+        <label for="exampleFormControlTextarea1">Auftragsnummer</label>
+        <select class="form-control"  name="projectnumber">
+          <option value="">-</option>
+          <?php foreach ($removeOrder as $row): ?>
+            <option value="<?php echo e($row) ?>"><?php echo e($row);?></option>
+          <?php endforeach; ?>
+        </select>
         <br>
         <h5>Lieferanschrift</h5>
         <label for="exampleFormControlTextarea1">Firmname</label>
@@ -31,9 +35,7 @@
       </div>
 
       <div class="col-sm">
-        <label for="exampleFormControlTextarea1">Lieferscheinnummer</label>
-        <input type="text" name="deliveryno" value="001/2020" class="form-control" >
-        <br>
+        <br><br><br><br>
         <h5>Rechnungsanschrift</h5>
         <label for="exampleFormControlTextarea1">Firmname</label>
         <input type="text" name="companynameinvoice" class="form-control" >
@@ -50,57 +52,57 @@
         <br>
       </div>
     </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <h4><u>Waren</u></h4>
-      <button class="btn btn-light" type="button" id="add">Produkt hinzufügen</button>
-      <button type="button" class=" btn btn-light btn_remove hidden">Letzten entfernen</button>
-      <div id="dynamic_field"></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h4><u>Waren</u></h4>
+        <button class="btn btn-light" type="button" id="add">Produkt hinzufügen</button>
+        <button type="button" class=" btn btn-light btn_remove hidden">Letzten entfernen</button>
+        <div id="dynamic_field"></div>
 
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <br>
 
-      <label for="exampleFormControlTextarea1">Auswahlliste</label>
+        <label for="exampleFormControlTextarea1">Auswahlliste</label>
 
-      <select class="form-control"  name="thenumbers">
-        <option value="">-</option>
-        <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
-          <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
-        <?php endforeach; ?>
-      </select>
-      <br>
-      <select class="form-control" id="select_1" name="thenumbers2">
-        <option value="">-</option>
-        <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
-          <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
-        <?php endforeach; ?>
-      </select>
+        <select class="form-control"  name="thenumbers">
+          <option value="">-</option>
+          <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
+            <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
+          <?php endforeach; ?>
+        </select>
+        <br>
+        <select class="form-control" id="select_1" name="thenumbers2">
+          <option value="">-</option>
+          <?php foreach ($all as $row): // In jedes Objekt und holt die entsprechenden Dinge heraus ?>
+            <option value="<?php echo e($row->id) ?>"><?php echo e($row->partnumber); ?>: <?php echo e($row->title);?></option>
+          <?php endforeach; ?>
+        </select>
 
-    </div>
+      </div>
 
-    <div class="col-sm">
-      <br>
-      <label></label>
-      <label for="exampleFormControlTextarea1">Anzahl</label>
-      <input type="text" name="productcountdropdown" value="" class="form-control" >
-      <label for="exampleFormControlTextarea1">Anzahl</label>
-      <input type="text" name="productcountdropdown2" value="" class="form-control" >
+      <div class="col-sm">
+        <br>
+        <label></label>
+        <label for="exampleFormControlTextarea1">Anzahl</label>
+        <input type="text" name="productcountdropdown" value="" class="form-control" >
+        <label for="exampleFormControlTextarea1">Anzahl</label>
+        <input type="text" name="productcountdropdown2" value="" class="form-control" >
+      </div>
     </div>
   </div>
-</div>
-<br>
-<div class="container under">
-  <button type="submit" name="pdf" class="btn btn-lg btn-info btn-block">Lieferschein erzeugen</button>
-</div>
-    </form>
+  <br>
+  <div class="container under">
+    <button type="submit" name="pdf" class="btn btn-lg btn-info btn-block">Lieferschein erzeugen</button>
+  </div>
+</form>
 
 
 <!-- Bootstrap core JavaScript

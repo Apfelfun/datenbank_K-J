@@ -12,7 +12,7 @@
     <br>
     <?php foreach ($complete[$i] as $row): ?>
       <div class="card">
-        <div class="card-header"><b> <a class="stretched-link text-dark" href="status-show?id=<?php echo e($row->id); ?>"><?php echo e($row->projectnumber); ?> : <?php echo e($row->deliverynumber) ?></a></b></div>
+        <div class="card-header"><b> <a class="stretched-link text-dark" href="status-show?id=<?php echo e($row->id); ?>"><?php echo e($row->projectnumber); ?> Lieferscheinnummer: <?php echo e($row->deliverynumber) ?></a></b></div>
         <div class="card-body">
           <h5 class="card-title"><?php echo e($row->deliverycompanyname); ?></h5>
           <?php if($row->progress): ?>

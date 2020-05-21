@@ -158,6 +158,12 @@
               Warenversand
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="service">
+              <span data-feather="file"></span>
+              Service
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

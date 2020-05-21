@@ -86,6 +86,7 @@ class PostsRepository extends AbstractRepository
     $table = $this -> getTableName();
     $model = $this -> getModelName();
     $row = $this -> getRow();
+    $manufacturer = 'manufacturer';
 
     $stmt = $this->pdo->prepare("SELECT * FROM `{$table}` WHERE `{$row}` LIKE :title");
     $stmt->execute([

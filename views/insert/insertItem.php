@@ -1,6 +1,6 @@
 <?php require __DIR__ . "/../layout/header.php"; ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <form class="" action="material" method="post">
+  <form class="" action="material-decision" method="post">
     <button type="submit" class="btn btn-outline-secondary" name="button"><i class="fas fa-arrow-left"></i></button>
   </form>
   <h1 class="h2">Material hinzufügen</h1>

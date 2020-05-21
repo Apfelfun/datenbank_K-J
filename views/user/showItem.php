@@ -25,6 +25,8 @@
     </div>
 
     <div class="col-sm">
+      <b>Preis:</b> <?php echo e($entry->price); ?>
+      <br>
       <b>Gewicht:</b> <?php echo e($entry->weight); ?> kg
       <br>
       <b>Material:</b> <?php echo e($entry->material); ?>
@@ -39,16 +41,22 @@
     </div>
   </div>
   <br>
-  <form action="posts-edit?id=<?php echo e($entry->id); ?>" method="POST">
-    <button type="submit" name="infoChange" class="btn btn-secondary">Informationen ändern</button>
-  </form>
-  <br>
-  <form action="storage-edit?id=<?php echo e($entry->id); ?>" method="POST">
-    <button type="submit" name="storageChange" class="btn btn-danger" >Lagerbestand bearbeiten</button>
-  </form>
-  <br>
-  <form action="delete?id=<?php echo e($entry->id); ?>" method="POST">
-    <button type="submit" name="storageChange" class="btn btn-danger" >Löschen</button>
-  </form>
+</div>
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <form action="posts-edit?id=<?php echo e($entry->id); ?>" method="POST">
+      <button type="submit" name="infoChange" class="btn btn-secondary">Informationen ändern</button>
+    </form>
+  </div>
+  <div class="btn-group mr-2" role="group" aria-label="Second group">
+    <form action="storage-edit?id=<?php echo e($entry->id); ?>" method="POST">
+      <button type="submit" name="storageChange" class="btn btn-danger" >Lagerbestand bearbeiten</button>
+    </form>
+  </div>
+  <div class="btn-group" role="group" aria-label="Third group">
+    <form action="delete?id=<?php echo e($entry->id); ?>" method="POST">
+      <button type="submit" name="storageChange" class="btn btn-danger" >Löschen</button>
+    </form>
+  </div>
 </div>
 <?php require __DIR__ . "/../layout/footer.php"; ?>

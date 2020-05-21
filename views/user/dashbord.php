@@ -6,5 +6,8 @@
 <h2>Aktuelle Angebote</h2>
 <h2>Aktuelle Aufträge</h2>
 <h2>Aktuelle Serviceeinsätze</h2>
+<ul class="list-group">
+
+</ul>
 
 <?php require __DIR__ . "/../layout/footer.php"; ?>
